@@ -2,7 +2,7 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+            :url  "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [ring-server "0.4.0"]
@@ -24,7 +24,7 @@
             [lein-asset-minifier "0.2.7"
              :exclusions [org.clojure/clojure]]]
 
-  :ring {:handler clang.handler/app
+  :ring {:handler      clang.handler/app
          :uberwar-name "clang.war"}
 
   :min-lein-version "2.5.0"
@@ -33,10 +33,10 @@
 
   :main clang.server
 
-  :clean-targets ^{:protect false}
-  [:target-path
-   [:cljsbuild :builds :app :compiler :output-dir]
-   [:cljsbuild :builds :app :compiler :output-to]]
+  :clean-targets ^{:protect false})
+[:target-path
+ [:cljsbuild :builds :app :compiler :output-dir]
+ [:cljsbuild :builds :app :compiler :output-to
 
   :source-paths ["src/clj" "src/cljc"]
   :resource-paths ["resources" "target/cljsbuild"]
@@ -49,67 +49,61 @@
   {:builds {:min
             {:source-paths ["src/cljs" "src/cljc" "env/prod/cljs"]
              :compiler
-             {:output-to "target/cljsbuild/public/js/app.js"
-              :output-dir "target/uberjar"
-              :optimizations :advanced
-              :pretty-print  false}}
+                           {:output-to     "target/cljsbuild/public/js/app.js"
+                            :output-dir    "target/uberjar"
+                            :optimizations :advanced
+                            :pretty-print  false}}
             :app
             {:source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
-             :figwheel {:on-jsload "clang.core/mount-root"}
+             :figwheel     {:on-jsload "clang.core/mount-root"}
              :compiler
-             {:main "clang.dev"
-              :asset-path "/js/out"
-              :output-to "target/cljsbuild/public/js/app.js"
-              :output-dir "target/cljsbuild/public/js/out"
-              :source-map true
-              :optimizations :none
-              :pretty-print  true}}
-
-
-
-            }
-   }
-
+                           {:main          "clang.dev"
+                            :asset-path    "/js/out"
+                            :output-to     "target/cljsbuild/public/js/app.js"
+                            :output-dir    "target/cljsbuild/public/js/out"
+                            :source-map    true
+                            :optimizations :none
+                            :pretty-print  true}}}}
 
   :figwheel
   {:http-server-root "public"
-   :server-port 3449
-   :nrepl-port 7002
-   :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"
-                      ]
-   :css-dirs ["resources/public/css"]
-   :ring-handler clang.handler/app}
+   :server-port      3449
+   :nrepl-port       7002
+   :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]
+
+   :css-dirs         ["resources/public/css"]
+   :ring-handler     clang.handler/app}
 
 
   :sass {:src "src/sass"
          :dst "resources/public/css"}
 
-  :profiles {:dev {:repl-options {:init-ns clang.repl
-                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+  :profiles {:dev     {:repl-options {:init-ns          clang.repl
+                                      :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
-                   :dependencies [[binaryage/devtools "0.9.4"]
-                                  [ring/ring-mock "0.3.1"]
-                                  [ring/ring-devel "1.6.1"]
-                                  [prone "1.1.4"]
-                                  [figwheel-sidecar "0.5.11"]
-                                  [org.clojure/tools.nrepl "0.2.13"]
-                                  [com.cemerick/piggieback "0.2.2"]
-                                  [pjstadig/humane-test-output "0.8.2"]
-                                  ]
+                       :dependencies [[binaryage/devtools "0.9.4"]
+                                      [ring/ring-mock "0.3.1"]
+                                      [ring/ring-devel "1.6.1"]
+                                      [prone "1.1.4"]
+                                      [figwheel-sidecar "0.5.11"]
+                                      [org.clojure/tools.nrepl "0.2.13"]
+                                      [com.cemerick/piggieback "0.2.2"]
+                                      [pjstadig/humane-test-output "0.8.2"]]
 
-                   :source-paths ["env/dev/clj"]
-                   :plugins [[lein-figwheel "0.5.11"]
-                             
-                             [lein-sassy "1.0.7"]]
 
-                   :injections [(require 'pjstadig.humane-test-output)
-                                (pjstadig.humane-test-output/activate!)]
+                       :source-paths ["env/dev/clj"]
+                       :plugins      [[lein-figwheel "0.5.11"]
 
-                   :env {:dev true}}
+                                      [lein-sassy "1.0.7"]]
 
-             :uberjar {:hooks [minify-assets.plugin/hooks]
+                       :injections   [(require 'pjstadig.humane-test-output)
+                                      (pjstadig.humane-test-output/activate!)]
+
+                       :env          {:dev true}}
+
+             :uberjar {:hooks        [minify-assets.plugin/hooks]
                        :source-paths ["env/prod/clj"]
-                       :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
-                       :env {:production true}
-                       :aot :all
-                       :omit-source true}})
+                       :prep-tasks   ["compile" ["cljsbuild" "once" "min"]]
+                       :env          {:production true}
+                       :aot          :all
+                       :omit-source  true}}]]

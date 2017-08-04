@@ -45,6 +45,8 @@
 
 (defn home-page []
   [:div#home-page
+   [:link {:type "prefetch" :href "/audio/clang.mp3"}]
+   [:link {:type "prefetch" :href "/img/leangrygattsuman.jpg"}]
    [:link {:type "text/css"
            :href "https://fonts.googleapis.com/css?family=Bangers|Bowlby+One+SC|Cabin+Sketch|Fredericka+the+Great|Frijole|Knewave|Kranky|Londrina+Sketch|Ranchers"
            :rel  "stylesheet"}]
