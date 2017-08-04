@@ -9,16 +9,18 @@
 
 (def clang-lifespan 2000)
 
-(defn clang! [id x y]
+(defn clang [id x y sub-class]
   [:div.clang {:key id
-               :style
-               {:left x
-                :top y}}])
+                :draggable false
+                :class sub-class
+                :style {:left x :top y}}])
 
 (defn add-clang [clang-atom x y]
-  (swap! clang-atom #(-> %
-                       (update :clangs conj (clang! (:auto-increment %) x y))
-                       (update :auto-increment inc))))
+  (let [classes (for [x (range 1 10)] (str "type-" x))]
+    (swap! clang-atom
+      #(-> %
+         (update :clangs conj (clang (:auto-increment %) x y (rand-nth classes)))
+         (update :auto-increment inc)))))
 
 (defn drop-clang [clang-atom]
   (swap! clang-atom #(update % :clangs subvec 1)))
@@ -31,21 +33,23 @@
          {:onClick
           (fn [e]
             (add-clang clangs e.clientX e.clientY)
-            (js/setTimeout #(drop-clang clangs) clang-lifespan))}]
+            (js/setTimeout #(drop-clang clangs) clang-lifespan)
+            (.play (new js/Audio "/audio/clang.mp3")))}]
         (:clangs @clangs)))))
 
+(defn footer []
+  [:footer [:strong "Greatness"]])
 
 ;; -------------------------
 ;; Views
 
 (defn home-page []
-  [:div [:h2 "Welcome to clang"]
-   [:div [:a {:href "/about"} "go to about page"]]
-   [canvas]])
-
-(defn about-page []
-  [:div [:h2 "About clang"]
-   [:div [:a {:href "/"} "go to the home page"]]])
+  [:div#home-page
+   [:link {:type "text/css"
+           :href "https://fonts.googleapis.com/css?family=Bangers|Bowlby+One+SC|Cabin+Sketch|Fredericka+the+Great|Frijole|Knewave|Kranky|Londrina+Sketch|Ranchers"
+           :rel  "stylesheet"}]
+   [canvas]
+   [footer]])
 
 ;; -------------------------
 ;; Routes
@@ -57,9 +61,6 @@
 
 (secretary/defroute "/" []
   (reset! page #'home-page))
-
-(secretary/defroute "/about" []
-  (reset! page #'about-page))
 
 ;; -------------------------
 ;; Initialize app

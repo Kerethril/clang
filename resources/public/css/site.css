@@ -63,7 +63,7 @@ div.clang{
   color: black;
   text-shadow: 0 0 3px white;
   transform: scale(0);
-  animation: clang-animation 2s;
+  animation: clang-animation 1s;
 }
 div.clang:after{
   content: "Clang!";
