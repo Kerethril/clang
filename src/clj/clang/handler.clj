@@ -7,10 +7,7 @@
 
 (def mount-target
   [:div#app
-      [:h3 "ClojureScript has not been compiled!"]
-      [:p "please run "
-       [:b "lein figwheel"]
-       " in order to start the compiler"]])
+      [:h3 {:style "padding-left: 1em"} "Please wait..."]])
 
 (defn head []
   [:head
@@ -18,8 +15,8 @@
    [:meta {:name "viewport"
            :content "width=device-width, initial-scale=1"}]
    [:title "Cunning Lying Arrogant Nerd Gamers"]
-   [:link {:type "prefetch" :href "/audio/clang.mp3"}]
-   [:link {:type "prefetch" :href "/img/leangrygattsuman.jpg"}]
+   [:link {:rel "prefetch" :href "/audio/clang.mp3"}]
+   [:link {:rel "prefetch" :href "/img/leangrygattsuman.jpg"}]
    (include-css (if (env :dev) "/css/site.css" "/css/site.min.css"))])
 
 (defn loading-page []
