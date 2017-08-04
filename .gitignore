@@ -1,0 +1,5 @@
+.idea/
+.lein*
+figwheel_server.log
+system.properties
+target/
