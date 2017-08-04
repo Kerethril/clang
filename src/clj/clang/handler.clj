@@ -17,6 +17,9 @@
    [:meta {:charset "utf-8"}]
    [:meta {:name "viewport"
            :content "width=device-width, initial-scale=1"}]
+   [:title "Cunning Lying Arrogant Nerd Gamers"]
+   [:link {:type "prefetch" :href "/audio/clang.mp3"}]
+   [:link {:type "prefetch" :href "/img/leangrygattsuman.jpg"}]
    (include-css (if (env :dev) "/css/site.css" "/css/site.min.css"))])
 
 (defn loading-page []
