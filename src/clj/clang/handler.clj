@@ -7,16 +7,14 @@
 
 (def mount-target
   [:div#app
-      [:h3 {:style "padding-left: 1em"} "Please wait..."]])
+   [:div.load-msg "Please wait..."]])
 
 (defn head []
   [:head
    [:meta {:charset "utf-8"}]
    [:meta {:name "viewport"
            :content "width=device-width, initial-scale=1"}]
-   [:title "Cunning Lying Arrogant Nerd Gamers"]
-   [:link {:rel "prefetch" :href "/audio/clang.mp3"}]
-   [:link {:rel "prefetch" :href "/img/leangrygattsuman.jpg"}]
+   [:title "Clang!"]
    (include-css (if (env :dev) "/css/site.css" "/css/site.min.css"))])
 
 (defn loading-page []
