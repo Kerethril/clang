@@ -50,4 +50,4 @@
      [:div.playlist-controls
       [:button.previous {:onClick #(playlist-previous playlist)} "◀◀"]
       [:span.now-playing (or (:title current) "[ no audio track ]")]
-      [:button.next {:onClick #(playlist-next playlist)} "►►"]]]))
+      [:button.next {:onClick #(playlist-next playlist)} "▶▶"]]]))
