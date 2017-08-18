@@ -29,4 +29,4 @@
                         (add-spot spots e.clientX e.clientY)
                         (js/setTimeout #(drop-spot spots) 2000)
                         (doseq [f on-click-hooks] (f)))]
-     (fn [] (into [:div.clickboard {:onClick spot-onclick}] (:spots @spots))))))
+     (fn [] (into [:div.clickboard {:onMouseDown spot-onclick}] (:spots @spots))))))

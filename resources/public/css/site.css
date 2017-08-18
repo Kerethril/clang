@@ -41,6 +41,7 @@
   font-size: 3em;
   margin: 1em;
   animation: footer-animation .5s ease-out;
+  pointer-events: none;
 }
 
 #clang-page footer strong{
@@ -124,6 +125,19 @@
     background: transparent;
     padding: 5px;
     font-size: 12px;
+}
+
+
+.music-player > .playlist-controls > button:hover{
+    color: #888;
+}
+
+.music-player > .playlist-controls > button:active{
+    color: #444;
+}
+
+.music-player > .playlist-controls > button.inactive{
+    visibility: hidden;
 }
 
 .music-player > .playlist-controls > .now-playing{

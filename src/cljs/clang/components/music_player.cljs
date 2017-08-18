@@ -48,6 +48,10 @@
     [:div.music-player
      [:audio {:src (:src current) :controls true :autoPlay true :loop true}]
      [:div.playlist-controls
-      [:button.previous {:onClick #(playlist-previous playlist)} "◀◀"]
+      [:button.previous
+       {:onClick #(playlist-previous playlist)
+        :class   (when-not (:previous @playlist) "inactive")} "◀◀"]
       [:span.now-playing (or (:title current) "[ no audio track ]")]
-      [:button.next {:onClick #(playlist-next playlist)} "▶▶"]]]))
+      [:button.next
+       {:onClick #(playlist-next playlist)
+        :class   (when-not (:next @playlist) "inactive")} "▶▶"]]]))

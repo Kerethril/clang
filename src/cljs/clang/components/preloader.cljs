@@ -28,7 +28,8 @@
               src (:url a)]
           (-> r
               (conj [:link {:rel "prefetch" :href src}])
-              (conj [tag {:src src (get-load-event-name tag) #(set-preloader-asset preloader-atom k true)}]))))
+              (conj [tag {:src src :preload "auto"
+                          (get-load-event-name tag) #(set-preloader-asset preloader-atom k true)}]))))
       []
       (:assets @preloader-atom))))
 
